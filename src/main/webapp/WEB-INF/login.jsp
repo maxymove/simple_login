@@ -115,34 +115,7 @@
         width: 100%;
         z-index: 2;
     }
-
-    /*footer {*/
-    /*    background-color: #222;*/
-    /*    color: #fff;*/
-    /*    font-size: 14px;*/
-    /*    bottom: 0;*/
-    /*    position: fixed;*/
-    /*    left: 0;*/
-    /*    right: 0;*/
-    /*    text-align: center;*/
-    /*    z-index: 999;*/
-    /*}*/
-
-    /*footer p {*/
-    /*    margin: 10px 0;*/
-    /*}*/
-
-    /*footer i {*/
-    /*    color: red;*/
-    /*}*/
-
-    /*footer a {*/
-    /*    color: #3c97bf;*/
-    /*    text-decoration: none;*/
-    /*}*/
-
 </style>
-
 
 <body>
 <div class="container" id="container">
@@ -150,6 +123,7 @@
         <form action="/login" method="post">
             <h1>Sign in</h1>
             <span>${error}</span>
+<%--            <span>or use your account</span>--%>
                 <input type="text" placeholder="Enter Username" name="username" required>
                 <input type="password" placeholder="Enter Password" name="password" required>
             <a href="#">Forgot your password?</a>
@@ -157,6 +131,5 @@
         </form>
     </div>
 </div>
-
 </body>
 </html>

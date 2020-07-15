@@ -1,76 +1,98 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.List" %>
-<%@ page import="io.muzoo.ooc.webapp.basic.security.User" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.Iterator" %>
-<%@ page import="io.muzoo.ooc.webapp.basic.security.SecurityService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
-<title>Users Page</title>
+<head>
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
 
-<style>
-    body {
-        background-color: #c94c4c;
-    }
-</style>
+        li {
+            float: left;
+        }
 
-<style>
-    .nav {
-        background-color: #eea29a;
-        list-style-type: none;
-        text-align: center;
-        margin: 0;
-        padding: 0;
-    }
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
 
-    .nav li {
-        display: inline-block;
-        font-size: 20px;
-        padding: 20px;
-    }
-</style>
+        li a:hover {
+            background-color: #111;
+        }
+    </style>
 
-<style>
-    .button {
-        background-color: #f7786b;
-        border: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-    }
-</style>
+
+    <style>
+        #usersTable {
+            display: table;
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 75%;
+        }
+
+        #usersTable td, #usersTable th {
+            // add
+            text-align: center;
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #usersTable tr:nth-child(even){background-color: #f2f2f2;}
+
+        #usersTable tr:hover {background-color: #ddd;}
+
+        #usersTable th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: justify-all;
+            /*text-align: left;*/
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
 </head>
 <body>
 
-<h1>Welcome back, ${username}</h1>
-<p>Username: ${currentUser.getUsername()}</p>
-<p>Email: ${currentUser.getEmail()}</p>
-
-<ul class="nav">
-    <li><a href="/" class="button">Home</a></li>
-    <li><a href="/add_user" class="button">Add User</a></li>
-    <li><a href="/logout" class="button">Logout</a></li>
-
-<%--    <li><a href="/">Home</a></li>--%>
-<%--    <li><a href="/add_user">Add User</a></li>--%>
-<%--    <li><a href="/logout">Logout</a></li>--%>
+<ul>
+    <li><a class="active" href="/">Home</a></li>
+    <li><a href="/add_user">Add User</a></li>
+    <li><a href="/logout">Logout</a></li>
 </ul>
-<body>
-<h3>
-    <c:forEach items="${users}" var="user">
-        <c:out value="${user.getUsername()}"/>
-        <form action="/edit" method="get">
-            <button type="submit" name="username" value="${user.getUsername()}">edit</button>
-        </form>
-        <form action="/delete" method="get">
-            <button type="submit" name="username" value="${user.getUsername()}">delete</button>
-        </form>
+
+<table id="usersTable">
+
+    <tr>
+        <th>username</th>
+        <th>password</th>
+        <th>email</th>
+        <th>action</th>
+    </tr>
+    <c:forEach items="${users}" var="u">
+        <tr>
+            <td>${u.getUsername()}</td>
+            <td>${u.getPassword()}</td>
+            <td>${u.getEmail()}</td>
+            <td>
+                <div>
+                    <form action="/edit" method="get">
+                        <button type="submit" name="username" value="${u.getUsername()}">edit</button>
+                    </form>
+                    <form action="/delete" method="get">
+                        <button type="submit" name="username" value="${u.getUsername()}">delete</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
     </c:forEach>
-</h3>
+</table>
+
 </body>
 </html>
