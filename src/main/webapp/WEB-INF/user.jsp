@@ -9,55 +9,58 @@
 <title>Users Page</title>
 
 <style>
-    .btn-group button {
-        background-color: #4CAF50; /* Green background */
-        border: 1px solid green; /* Green border */
-        color: white; /* White text */
-        padding: 10px 24px; /* Some padding */
-        cursor: pointer; /* Pointer/hand icon */
-        float: left; /* Float the buttons side by side */
-    }
-
-    .btn-group button:not(:last-child) {
-        border-right: none; /* Prevent double borders */
-    }
-
-    /* Clear floats (clearfix hack) */
-    .btn-group:after {
-        content: "";
-        clear: both;
-        display: table;
-    }
-
-    /* Add a background color on hover */
-    .btn-group button:hover {
-        background-color: #3e8e41;
+    body {
+        background-color: #c94c4c;
     }
 </style>
+
+<style>
+    .nav {
+        background-color: #eea29a;
+        list-style-type: none;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav li {
+        display: inline-block;
+        font-size: 20px;
+        padding: 20px;
+    }
+</style>
+
+<style>
+    .button {
+        background-color: #f7786b;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+</style>
+</head>
 <body>
-<h3>
-    <p>${error}</p>
-</h3>
-<h1>
-    <div class="btn-group">
-        <form action="/" method="get">
-            <button type="submit">Home</button>
-        </form>
-        <form action="/add_user" method="get">
-            <button type="submit">Add user</button>
-        </form>
-        <form action="/logout" method="get">
-            <button type="submit">Logout</button>
-        </form>
-    </div>
-</h1>
-<h2>
-    <p>Welcome back, ${username}</p>
-</h2>
-<h4>
-    <p>Username: ${currentUser.getUsername()}</p>
-    <p>Email: ${currentUser.getEmail()}</p>
-</h4>
+
+<h1>Welcome back, ${username}</h1>
+<p>Username: ${currentUser.getUsername()}</p>
+<p>Email: ${currentUser.getEmail()}</p>
+
+<ul class="nav">
+    <li><a href="/" class="button">Home</a></li>
+    <li><a href="/add_user" class="button">Add User</a></li>
+    <li><a href="/logout" class="button">Logout</a></li>
+
+<%--    <li><a href="/">Home</a></li>--%>
+<%--    <li><a href="/add_user">Add User</a></li>--%>
+<%--    <li><a href="/logout">Logout</a></li>--%>
+</ul>
+<body>
 <h3>
     <c:forEach items="${users}" var="user">
         <c:out value="${user.getUsername()}"/>
@@ -69,8 +72,5 @@
         </form>
     </c:forEach>
 </h3>
-<h1>
-
-</h1>
 </body>
 </html>
