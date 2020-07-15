@@ -22,8 +22,10 @@ public class AddUserServlet extends AbstractRoutableHttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String email = request.getParameter("email");
+            String firstName = request.getParameter("firstName");
+            String lastName = request.getParameter("lastName");
             if (!userService.checkIfUserExists(username)) {
-                userService.addUser(username, password, email);
+                userService.addUser(username, password, email, firstName, lastName);
                 response.sendRedirect("/");
             } else {
                 String error = "username already existed";

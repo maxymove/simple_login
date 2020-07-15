@@ -3,39 +3,77 @@
 
 <html>
 <head>
+
     <style>
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #333;
-        }
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
 
-        li {
-            float: left;
-        }
+    li {
+        float: left;
+    }
 
-        li a {
-            display: block;
-            color: white;
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    li a:hover {
+        background-color: #111;
+    }
+</style>
+<%--    end navigation head css--%>
+
+    <link rel="stylesheet" href="../../cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            /*max-width: 300px;*/
+            width: 25%;
+            margin: auto;
             text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
+            /*font-family: arial;*/
         }
-
-        li a:hover {
-            background-color: #111;
+        .title {
+            color: grey;
+            font-size: 18px;
+        }
+        button {
+            border: none;
+            outline: 0;
+            display: inline-block;
+            padding: 8px;
+            color: white;
+            background-color: #000;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+        }
+        a {
+            text-decoration: none;
+            font-size: 22px;
+            color: black;
+        }
+        button:hover, a:hover {
+            opacity: 0.7;
         }
     </style>
-
+<%--    end profile card css--%>
 
     <style>
         #usersTable {
             display: table;
             font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-            border-collapse: collapse;
-            width: 75%;
+            /*border-collapse: collapse;*/
+            width: 50%;
         }
 
         #usersTable td, #usersTable th {
@@ -67,18 +105,22 @@
     <li><a href="/logout">Logout</a></li>
 </ul>
 
+<p>${error}</p>
+
 <table id="usersTable">
 
     <tr>
         <th>username</th>
-        <th>password</th>
+        <th>fname</th>
+        <th>lname</th>
         <th>email</th>
         <th>action</th>
     </tr>
     <c:forEach items="${users}" var="u">
         <tr>
             <td>${u.getUsername()}</td>
-            <td>${u.getPassword()}</td>
+            <td>${u.getFirstName()}</td>
+            <td>${u.getLastName()}</td>
             <td>${u.getEmail()}</td>
             <td>
                 <div>
@@ -92,7 +134,27 @@
             </td>
         </tr>
     </c:forEach>
+
+    <h2 style="text-align:center">current user profile</h2>
+    <div class="card">
+<%--        <h1>John Doe</h1>--%>
+        <p>Username: ${currentUser.getUsername()}</p>
+        <p>Full Name: ${currentUser.getFirstName()} ${currentUser.getLastName()}</p>
+        <p>email: ${currentUser.getEmail()}</p>
+<%--        <p class="title">CEO & Founder, Example</p>--%>
+<%--        <p>Harvard University</p>--%>
+        <div style="margin: 24px 0;">
+            <a href="#"><i class="fa fa-dribbble"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+            <a href="#"><i class="fa fa-facebook"></i></a>
+        </div>
+<%--        <p><button>Contact</button></p>--%>
+    </div>
+
 </table>
+
+
 
 </body>
 </html>

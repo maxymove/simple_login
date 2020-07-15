@@ -28,7 +28,9 @@ public class EditServlet extends AbstractRoutableHttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
-        userService.editUser(username, password, email);
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        userService.editUser(username, password, email, firstName, lastName);
         response.sendRedirect("/user");
     }
 

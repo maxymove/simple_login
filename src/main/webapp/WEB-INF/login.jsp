@@ -2,7 +2,6 @@
 <html>
 <title>Home Page</title>
 
-
 <style>
     @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 

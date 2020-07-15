@@ -37,7 +37,8 @@ public class MySql {
             resultSet = statement.executeQuery("select * from ooc_2019.users;");
             while (resultSet.next()) {
                 User user = new User(resultSet.getString(2), resultSet.getString(3),
-                        resultSet.getString(4));
+                        resultSet.getString(4), resultSet.getString(5),
+                        resultSet.getString(6));
                 users.add(user);
             }
         } catch (SQLException throwables) {
@@ -48,18 +49,20 @@ public class MySql {
         return users;
     }
 
-    public void insert(String username, String password, String email) {
+    public void insert(String username, String password, String email, String firstName, String lastName) {
         try {
 //            Class.forName(jdbcDriverStr);
             connection = DriverManager.getConnection(jdbcURL);
             // the mysql insert statement
-            String query = " insert into users (username, password, email)"
-                    + " values (?, ?, ?)";
+            String query = " insert into users (username, password, email, firstName, lastName)"
+                    + " values (?, ?, ?, ?, ?)";
             // create the mysql insert preparedstatement
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
             preparedStatement.setString(3, email);
+            preparedStatement.setString(4, firstName);
+            preparedStatement.setString(5, lastName);
             // execute the preparedstatement
             preparedStatement.execute();
 //        } catch (ClassNotFoundException e) {
@@ -83,7 +86,7 @@ public class MySql {
         }
     }
 
-    public void update(String username, String password, String email) {
+    public void update(String username, String password, String email, String firstname, String lastName) {
         try {
             connection = DriverManager.getConnection(jdbcURL);
             String query = " update users set password = ? where username = ?";
@@ -95,6 +98,18 @@ public class MySql {
             query = " update users set email = ? where username = ?";
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, email);
+            preparedStatement.setString(2, username);
+            preparedStatement.executeUpdate();
+
+            query = " update users set firstName = ? where username = ?";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, firstname);
+            preparedStatement.setString(2, username);
+            preparedStatement.executeUpdate();
+
+            query = " update users set lastName = ? where username = ?";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, lastName);
             preparedStatement.setString(2, username);
             preparedStatement.executeUpdate();
 
