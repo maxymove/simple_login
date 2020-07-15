@@ -36,7 +36,8 @@ public class MySql {
             statement = connection.createStatement();
             resultSet = statement.executeQuery("select * from ooc_2019.users;");
             while (resultSet.next()) {
-                User user = new User(resultSet.getString(2), resultSet.getString(3));
+                User user = new User(resultSet.getString(2), resultSet.getString(3),
+                        resultSet.getString(4));
                 users.add(user);
             }
         } catch (SQLException throwables) {
@@ -47,17 +48,18 @@ public class MySql {
         return users;
     }
 
-    public void insertUser(String username, String password) {
+    public void insert(String username, String password, String email) {
         try {
 //            Class.forName(jdbcDriverStr);
             connection = DriverManager.getConnection(jdbcURL);
             // the mysql insert statement
-            String query = " insert into users (username, password)"
-                    + " values (?, ?)";
+            String query = " insert into users (username, password, email)"
+                    + " values (?, ?, ?)";
             // create the mysql insert preparedstatement
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
+            preparedStatement.setString(3, email);
             // execute the preparedstatement
             preparedStatement.execute();
 //        } catch (ClassNotFoundException e) {
@@ -69,29 +71,39 @@ public class MySql {
         }
     }
 
-//    public void readData() throws Exception {
-//        try {
-//            Class.forName(jdbcDriverStr);
-//            connection = DriverManager.getConnection(jdbcURL);
-//            statement = connection.createStatement();
-//            resultSet = statement.executeQuery("select * from ooc_test.test_table;");
-//            getResultSet(resultSet);
-//            preparedStatement = connection.prepareStatement("insert into ooc_test.test_table values (default,?)");
-//            preparedStatement.setString(1, "insert test from java");
-//            preparedStatement.executeUpdate();
-//        } finally {
-//            close();
-//        }
-//    }
+    public void delete(String username) {
+        try {
+            connection = DriverManager.getConnection(jdbcURL);
+            String query = " delete from users where username = ?";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            preparedStatement.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 
-//    private void getResultSet(ResultSet resultSet) throws Exception {
-//        while (resultSet.next()) {
-//            Integer id = resultSet.getInt(TestTableColumns.id.toString());
-//            String text = resultSet.getString(TestTableColumns.TEXT.toString());
-//            System.out.println("id: " + id);
-//            System.out.println("text: " + text);
-//        }
-//    }
+    public void update(String username, String password, String email) {
+        try {
+            connection = DriverManager.getConnection(jdbcURL);
+            String query = " update users set password = ? where username = ?";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, password);
+            preparedStatement.setString(2, username);
+            preparedStatement.executeUpdate();
+
+            query = " update users set email = ? where username = ?";
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, username);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            close();
+        }
+    }
 
     private void close() {
         try {

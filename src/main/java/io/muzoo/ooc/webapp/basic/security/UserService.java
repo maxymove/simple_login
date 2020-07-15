@@ -8,8 +8,16 @@ public class UserService {
 
     private MySql mySql = new MySql();
 
-    public void addUser(String username, String password) {
-        mySql.insertUser(username, password);
+    public void addUser(String username, String password, String email) {
+        mySql.insert(username, password, email);
+    }
+
+    public void removeUser(String username) {
+        mySql.delete(username);
+    }
+
+    public void editUser(String username, String password, String email) {
+        mySql.update(username, password, email);
     }
 
     public List<User> getUsers() {

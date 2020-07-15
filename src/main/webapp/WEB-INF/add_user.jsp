@@ -2,6 +2,7 @@
 <html>
 <title>Add User</title>
 <body>
+<p>${error}</p>
 <h1>
     This is Add User page.
 </h1>

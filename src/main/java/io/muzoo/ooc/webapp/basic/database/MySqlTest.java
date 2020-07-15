@@ -8,7 +8,8 @@ public class MySqlTest {
 
     public static void main(String[] args) throws Exception {
         MySql mySQL = new MySql();
-        mySQL.insertUser("max", "root");
+        mySQL.update("max", "12345", "max@ooc.com");
+//        mySQL.delete("cha");
 //        for (User user : mySQL.getUsers()) {
 //            System.out.printf("username: %s password: %s\n", user.getUsername(), user.getPassword());
 //        }
