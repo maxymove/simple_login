@@ -107,24 +107,17 @@
 
 <p>${error}</p>
 
-<p>Click the button to demonstrate line-breaks in a confirm box.</p>
-
-<button onclick="myFunction()">Try it</button>
-
-<p id="demo"></p>
-
 <script>
     function myFunction() {
         var txt;
-        var r = confirm("Press a button!\nEither OK or Cancel.\nThe button you pressed will be displayed in the result window.");
-        if (r == true) {
-            txt = "You pressed OK!";
-        } else {
-            txt = "You pressed Cancel!";
-        }
-        document.getElementById("demo").innerHTML = txt;
+        var r = confirm("Confirm deleting user");
     }
 </script>
+
+
+
+
+
 
 <table id="usersTable">
 
@@ -146,8 +139,8 @@
                     <form action="/edit" method="get">
                         <button type="submit" name="username" value="${u.getUsername()}">edit</button>
                     </form>
-                    <form action="/delete" method="get">
-                        <button type="submit" name="username" value="${u.getUsername()}">delete</button>
+                    <form id="delete-form" action="/delete" method="get">
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete this user?');" name="username" value="${u.getUsername()}">delete</button>
                     </form>
                 </div>
             </td>
@@ -156,19 +149,15 @@
 
     <h2 style="text-align:center">current user profile</h2>
     <div class="card">
-<%--        <h1>John Doe</h1>--%>
         <p>Username: ${currentUser.getUsername()}</p>
         <p>Full Name: ${currentUser.getFirstName()} ${currentUser.getLastName()}</p>
         <p>email: ${currentUser.getEmail()}</p>
-<%--        <p class="title">CEO & Founder, Example</p>--%>
-<%--        <p>Harvard University</p>--%>
         <div style="margin: 24px 0;">
             <a href="#"><i class="fa fa-dribbble"></i></a>
             <a href="#"><i class="fa fa-twitter"></i></a>
             <a href="#"><i class="fa fa-linkedin"></i></a>
             <a href="#"><i class="fa fa-facebook"></i></a>
         </div>
-<%--        <p><button>Contact</button></p>--%>
     </div>
 
 </table>
