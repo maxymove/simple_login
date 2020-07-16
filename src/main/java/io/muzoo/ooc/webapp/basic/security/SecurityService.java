@@ -8,6 +8,7 @@ import java.util.Objects;
 
 public class SecurityService {
 
+    private MySql mySql;
     private UserService userService;
 
     public void setUserService(UserService userService) {

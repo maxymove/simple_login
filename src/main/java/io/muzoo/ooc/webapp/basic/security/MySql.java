@@ -1,6 +1,5 @@
 package io.muzoo.ooc.webapp.basic.security;
 
-import io.muzoo.ooc.webapp.basic.security.User;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
@@ -17,6 +16,30 @@ public class MySql {
     private Statement statement;
     private ResultSet resultSet;
     private PreparedStatement preparedStatement;
+
+    public MySql() {
+        try {
+            connection = DriverManager.getConnection(jdbcURL);
+            statement = connection.createStatement();
+//            String query = "CREATE TABLE IF NOT EXISTS " + "users"
+//                    + "  (id           int(11) primary key auto_increment,"
+//                    + "   username            varchar(255) not null ,"
+//                    + "   password          varchar(255) not null ,"
+//                    + "   email           varchar(255),"
+//                    + "   firstName           varchar(255),"
+//                    + "   lastName     varchar(255)";
+            statement.execute("create table if not exists users (id int(11) primary key auto_increment, username varchar(255) not null, password varchar(255), email varchar(255), firstname varchar(255), lastname varchar(255))");
+//            String hashpw = BCrypt.hashpw("root", BCrypt.gensalt());
+            resultSet = statement.executeQuery("select * from ooc_2019.users;");
+            if (!resultSet.next()) {
+                insert("admin", "root", null, null, null);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            close();
+        }
+    }
 
     public User getUser(String username) {
         for (User user : getUsers()) {

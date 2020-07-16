@@ -1,5 +1,6 @@
 package io.muzoo.ooc.webapp.basic;
 
+import io.muzoo.ooc.webapp.basic.security.MySql;
 import io.muzoo.ooc.webapp.basic.security.SecurityService;
 import io.muzoo.ooc.webapp.basic.security.UserService;
 import io.muzoo.ooc.webapp.basic.servlets.*;
@@ -27,6 +28,7 @@ public class ServletRouter {
     public void init(Context ctx) {
         UserService userService = new UserService();
         SecurityService securityService = new SecurityService();
+        MySql mySql = new MySql();
         securityService.setUserService(userService);
 
         for (Class<? extends AbstractRoutableHttpServlet> servletClass: servletClasses) {

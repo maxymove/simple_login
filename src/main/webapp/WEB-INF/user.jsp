@@ -105,19 +105,9 @@
     <li><a href="/logout">Logout</a></li>
 </ul>
 
-<p>${error}</p>
-
-<script>
-    function myFunction() {
-        var txt;
-        var r = confirm("Confirm deleting user");
-    }
-</script>
-
-
-
-
-
+<h1>
+    <p>${error}</p>
+</h1>
 
 <table id="usersTable">
 
@@ -152,12 +142,6 @@
         <p>Username: ${currentUser.getUsername()}</p>
         <p>Full Name: ${currentUser.getFirstName()} ${currentUser.getLastName()}</p>
         <p>email: ${currentUser.getEmail()}</p>
-        <div style="margin: 24px 0;">
-            <a href="#"><i class="fa fa-dribbble"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-facebook"></i></a>
-        </div>
     </div>
 
 </table>

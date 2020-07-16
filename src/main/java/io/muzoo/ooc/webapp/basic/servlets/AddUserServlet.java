@@ -38,7 +38,6 @@ public class AddUserServlet extends AbstractRoutableHttpServlet {
         } else {
             response.sendRedirect("/user");
         }
-
     }
 
     @Override
