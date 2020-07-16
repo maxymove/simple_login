@@ -1,6 +1,7 @@
-package io.muzoo.ooc.webapp.basic.database;
+package io.muzoo.ooc.webapp.basic.security;
 
 import io.muzoo.ooc.webapp.basic.security.User;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,25 +9,22 @@ import java.util.List;
 
 public class MySql {
 
-    enum TestTableColumns {
-        id, TEXT;
-    }
-
-    public static final String MYSQL_DRIVER = "com.mysql.jdbc.Driver";
-    public static final String MYSQL_URL = "jdbc:mysql://localhost/ooc_2019?"
+    private final String jdbcDriverStr = "com.mysql.jdbc.Driver";
+    private final String jdbcURL = "jdbc:mysql://localhost/ooc_2019?"
             + "user=max&password=root";
-
-    private final String jdbcDriverStr;
-    private final String jdbcURL;
 
     private Connection connection;
     private Statement statement;
     private ResultSet resultSet;
     private PreparedStatement preparedStatement;
 
-    public MySql() {
-        this.jdbcDriverStr = MYSQL_DRIVER;
-        this.jdbcURL = MYSQL_URL;
+    public User getUser(String username) {
+        for (User user : getUsers()) {
+            if (user.getUsername().equals(username)) {
+                return user;
+            }
+        }
+        return null;
     }
 
     public List<User> getUsers() {
@@ -59,7 +57,9 @@ public class MySql {
             // create the mysql insert preparedstatement
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
+            String hashpw = BCrypt.hashpw(password, BCrypt.gensalt());
+            preparedStatement.setString(2, hashpw);
+//            preparedStatement.setString(2, password);
             preparedStatement.setString(3, email);
             preparedStatement.setString(4, firstName);
             preparedStatement.setString(5, lastName);
@@ -89,9 +89,12 @@ public class MySql {
     public void update(String username, String password, String email, String firstname, String lastName) {
         try {
             connection = DriverManager.getConnection(jdbcURL);
+
             String query = " update users set password = ? where username = ?";
             preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, password);
+            String hashpw = BCrypt.hashpw(password, BCrypt.gensalt());
+            preparedStatement.setString(1, hashpw);
+//            preparedStatement.setString(1, password);
             preparedStatement.setString(2, username);
             preparedStatement.executeUpdate();
 

@@ -1,5 +1,6 @@
 package io.muzoo.ooc.webapp.basic.servlets;
 
+import io.muzoo.ooc.webapp.basic.AbstractRoutableHttpServlet;
 import io.muzoo.ooc.webapp.basic.security.User;
 
 import javax.servlet.RequestDispatcher;

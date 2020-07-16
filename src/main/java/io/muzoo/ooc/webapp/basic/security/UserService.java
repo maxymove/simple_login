@@ -1,7 +1,5 @@
 package io.muzoo.ooc.webapp.basic.security;
 
-import io.muzoo.ooc.webapp.basic.database.MySql;
-
 import java.util.List;
 
 public class UserService {
@@ -25,15 +23,6 @@ public class UserService {
     }
 
     public User getUser(String username) {
-        for (User user : getUsers()) {
-            if (user.getUsername().equals(username)) {
-                return user;
-            }
-        }
-        return null;
-    }
-
-    public User findByUsername(String username) {
         for (User user : getUsers()) {
             if (user.getUsername().equals(username)) {
                 return user;

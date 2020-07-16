@@ -1,5 +1,6 @@
 package io.muzoo.ooc.webapp.basic.servlets;
 
+import io.muzoo.ooc.webapp.basic.AbstractRoutableHttpServlet;
 import io.muzoo.ooc.webapp.basic.security.User;
 
 import javax.servlet.RequestDispatcher;
@@ -19,6 +20,7 @@ public class UserServlet extends AbstractRoutableHttpServlet {
             // List of users
             List<User> users = securityService.getUserService().getUsers();
             request.setAttribute("users", users);
+
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("WEB-INF/user.jsp");
             requestDispatcher.include(request, response);
         } else {

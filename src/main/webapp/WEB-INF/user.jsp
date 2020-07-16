@@ -107,12 +107,31 @@
 
 <p>${error}</p>
 
+<p>Click the button to demonstrate line-breaks in a confirm box.</p>
+
+<button onclick="myFunction()">Try it</button>
+
+<p id="demo"></p>
+
+<script>
+    function myFunction() {
+        var txt;
+        var r = confirm("Press a button!\nEither OK or Cancel.\nThe button you pressed will be displayed in the result window.");
+        if (r == true) {
+            txt = "You pressed OK!";
+        } else {
+            txt = "You pressed Cancel!";
+        }
+        document.getElementById("demo").innerHTML = txt;
+    }
+</script>
+
 <table id="usersTable">
 
     <tr>
         <th>username</th>
-        <th>fname</th>
-        <th>lname</th>
+        <th>first name</th>
+        <th>last name</th>
         <th>email</th>
         <th>action</th>
     </tr>
