@@ -4,11 +4,11 @@
 <body>
 <p>
 <form action="/edit" method="post">
-    <input type="text" placeholder="Enter new Username" name="username" value="${currentUser.getUsername()}" required><br>
-    <input type="password" placeholder="Enter a new Password" name="password" value="" required ><br>
-    <input type="text" placeholder="Enter a new email" name="email" value="${currentUser.getEmail()}" ><br>
-    <input type="text" placeholder="Enter your first name" name="firstName" value="${currentUser.getFirstName()}" ><br>
-    <input type="text" placeholder="Enter your last name" name="lastName" value="${currentUser.getLastName()}" ><br>
+    Password<input type="password" placeholder="Enter a new Password" name="password" value="" required ><br>
+    Email<input type="text" placeholder="Enter a new email" name="email" value="${currentUser.getEmail()}" ><br>
+    First Name<input type="text" placeholder="Enter your first name" name="firstName" value="${currentUser.getFirstName()}" ><br>
+    Last Name<input type="text" placeholder="Enter your last name" name="lastName" value="${currentUser.getLastName()}" ><br>
+    <input type="hidden" name="username" value="${currentUser.getUsername()}" ><br>
     <button type="submit">submit</button>
 </form>
 </p>
